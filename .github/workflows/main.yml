@@ -14,6 +14,7 @@ jobs:
       MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
       DOMAIN: ${{ secrets.DOMAIN }}
       EMAIL: ${{ secrets.EMAIL }}
+      LOCATION: ${{ secrets.LOCATION }}
 
     steps:
       - name: Checkout repo
