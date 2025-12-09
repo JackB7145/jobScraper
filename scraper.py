@@ -8,8 +8,8 @@ LINKEDIN_BASE_URL = "https://www.linkedin.com"
 
 def scrape_linkedin_jobs(
     keywords: str = "software engineering intern",
-    location: str = "Toronto, Ontario, Canada",
-    time_range_hours: int = 3600
+    location: str = "Canada",
+    time_range_hours: int = 5400
 ) -> List[Dict[str, Optional[str]]]:
     """
     Scrape LinkedIn guest job postings via their /jobs-guest/jobs/api endpoint.
