@@ -1,4 +1,5 @@
 # scraper.py
+import os
 import requests
 from bs4 import BeautifulSoup
 from typing import List, Dict, Optional
@@ -6,7 +7,7 @@ from urllib.parse import urljoin
 
 LINKEDIN_BASE_URL = "https://www.linkedin.com"
 
-# Minimal geoId mapping for sanity. Add more if needed.
+# Minimal geoId mapping
 GEO_IDS = {
     "canada": "101174742",
     "toronto, ontario, canada": "102332259",
@@ -21,9 +22,12 @@ def resolve_geo_id(location: str) -> str:
 
 def scrape_linkedin_jobs(
     keywords: str = "software engineering intern",
-    location: str = "Canada",
+    location: Optional[str] = None,
     time_range_hours: int = 5400
 ) -> List[Dict[str, Optional[str]]]:
+
+    # Pull from environment variable if not supplied directly
+    location = location or os.getenv("LOCATION", "Canada")
 
     URL = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
 
