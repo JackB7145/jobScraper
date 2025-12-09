@@ -26,5 +26,11 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4
 
+      - name: Debug env
+        run: |
+          echo "MAILGUN_API_KEY -> ${MAILGUN_API_KEY}"
+          echo "DOMAIN -> ${DOMAIN}"
+          echo "EMAIL -> ${EMAIL}"
+
       - name: Run scraper
         run: python main.py
