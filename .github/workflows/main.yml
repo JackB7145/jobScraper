@@ -27,4 +27,4 @@ jobs:
         run: pip install requests beautifulsoup4
 
       - name: Run scraper
-        run: python your_script.py
+        run: python main.py
