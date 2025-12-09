@@ -8,6 +8,7 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    environment: dev
 
     env:
       MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
