@@ -34,4 +34,4 @@ jobs:
           echo "EMAIL -> ${EMAIL}"
 
       - name: Run scraper
-        run: python job_scraper.py
+        run: python main.py
