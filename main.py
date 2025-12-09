@@ -7,10 +7,16 @@ from formatter import format_jobs_email
 # --- CONFIG ---
 MAILGUN_API_KEY = os.environ.get("MAILGUN_API_KEY")
 MAILGUN_DOMAIN  = os.environ.get("DOMAIN")
-RECIPIENT       = os.environ.get("EMAIL")
-FROM_EMAIL      = f"job-alert@{MAILGUN_DOMAIN}"
 
-if not MAILGUN_API_KEY or not MAILGUN_DOMAIN or not RECIPIENT:
+raw_recipients = os.environ.get("EMAIL")
+if not raw_recipients:
+    raise ValueError("EMAIL env var missing.")
+
+RECIPIENTS = [email.strip() for email in raw_recipients.split(",")]
+
+FROM_EMAIL = f"job-alert@{MAILGUN_DOMAIN}"
+
+if not MAILGUN_API_KEY or not MAILGUN_DOMAIN or not RECIPIENTS:
     raise ValueError("Missing one or more required environment variables.")
 
 # --- SCRAPE ---
@@ -33,7 +39,7 @@ if not email_data:
 # --- SEND EMAIL via Mailgun ---
 data = {
     "from": f"Job Alert <{FROM_EMAIL}>",
-    "to": [RECIPIENT],
+    "to": RECIPIENTS,        # <-- send to the whole list
     "subject": email_data.subject,
     "text": email_data.body_text,
     "html": email_data.body_html
